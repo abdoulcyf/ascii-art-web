@@ -1,6 +1,7 @@
-package handlers
+package templates
 
 import (
+	handlers "main/handlers"
 	"net/http"
 	"text/template"
 )
@@ -28,14 +29,14 @@ func AsciiArtHandler(w http.ResponseWriter, r *http.Request) {
 	var asciiArt string
 	switch banner {
 	case shadowBanner:
-		asciiArt = GenerateShadowAsciiArt(text)
+		asciiArt = handlers.GenerateShadowAsciiArt(text)
 	case standardBanner:
-		asciiArt = GenerateAsciiArt(text)
+		asciiArt = handlers.GenerateAsciiArt(text)
 	case thinkertoyBanner:
-		asciiArt = GenerateThinkertoyAsciiArt(text)
+		asciiArt = handlers.GenerateThinkertoyAsciiArt(text)
 	default:
 		// Use standard banner by default
-		asciiArt = GenerateAsciiArt(text)
+		asciiArt = handlers.GenerateAsciiArt(text)
 	}
 
 	// Render the result using a template
