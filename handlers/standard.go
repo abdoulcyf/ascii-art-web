@@ -42,10 +42,10 @@ func StandardHandler() {
 
 	finalStr := draw.StrMaker(cliStr, patternMap, chLength)
 	fmt.Println(finalStr)
+	//-----------------------------------------
 
 	//Define the ASCII art generator function
 	GenerateAsciiArt = func(text string) string {
 		return draw.StrMaker(text, patternMap, chLength)
 	}
-	//-----------------------------------------
 }

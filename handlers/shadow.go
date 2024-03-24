@@ -39,13 +39,11 @@ func ShadowHandler() {
 		return
 	}
 	//----------------------------------------------
-
 	finalStr := draw.StrMaker(cliStr, patternMap, chLength)
 	fmt.Println(finalStr)
-
+	//-----------------------------------------
 	//Define the ASCII art generator function
 	GenerateShadowAsciiArt = func(text string) string {
 		return draw.StrMaker(text, patternMap, chLength)
 	}
-	//-----------------------------------------
 }

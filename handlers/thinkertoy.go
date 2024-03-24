@@ -43,10 +43,10 @@ func ThinkerToyHandler() {
 
 	finalStr := draw.StrMaker(cliStr, patternMap, chLength)
 	fmt.Println(finalStr)
+	//-----------------------------------------
 
 	//Define the ASCII art generator function
 	GenerateThinkertoyAsciiArt = func(text string) string {
 		return draw.StrMaker(text, patternMap, chLength)
 	}
-	//-----------------------------------------
 }
