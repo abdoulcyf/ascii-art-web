@@ -1,7 +1,6 @@
-package templates
+package handlers
 
 import (
-	handlers "main/handlers"
 	"net/http"
 	"text/template"
 )
@@ -29,14 +28,14 @@ func AsciiArtHandler(w http.ResponseWriter, r *http.Request) {
 	var asciiArt string
 	switch banner {
 	case shadowBanner:
-		asciiArt = handlers.GenerateShadowAsciiArt(text)
+		asciiArt = GenerateShadowAsciiArt(text)
 	case standardBanner:
-		asciiArt = handlers.GenerateAsciiArt(text)
+		asciiArt = GenerateAsciiArt(text)
 	case thinkertoyBanner:
-		asciiArt = handlers.GenerateThinkertoyAsciiArt(text)
+		asciiArt = GenerateThinkertoyAsciiArt(text)
 	default:
 		// Use standard banner by default
-		asciiArt = handlers.GenerateAsciiArt(text)
+		asciiArt = GenerateAsciiArt(text)
 	}
 
 	// Render the result using a template
@@ -45,25 +44,9 @@ func AsciiArtHandler(w http.ResponseWriter, r *http.Request) {
 		Banner: asciiArt,
 	}
 
-	tmpl := template.Must(template.New("result").Parse(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>ASCII Art Result</title>
-            <style>
-              body{
-				text-align: center;
-				background-color:#4CAF50;
-				color: white;
-			  }
-            </style>
-        </head>
-        <body>
-            <h1>ASCII Art Result</h1>
-            <pre>{{.Text}}</pre>
-            <pre>{{.Banner}}</pre>
-        </body>
-        </html>
-    `))
+	tmpl, err := template.ParseFiles("../templates/result.html")
+	if err != nil {
+		panic(err)
+	}
 	tmpl.Execute(w, result)
 }

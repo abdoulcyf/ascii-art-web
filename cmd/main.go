@@ -2,7 +2,6 @@ package main
 
 import (
 	handlers "main/handlers"
-	templates "main/templates"
 	"net/http"
 )
 
@@ -12,8 +11,8 @@ func main() {
 	handlers.ThinkerToyHandler()
 
 	//Define HTTP routes
-	http.HandleFunc("/", templates.MainPageHandler)
-	http.HandleFunc("/ascii-art", templates.AsciiArtHandler)
+	http.HandleFunc("/", handlers.MainPageHandler)
+	http.HandleFunc("/ascii-art", handlers.AsciiArtHandler)
 
 	// Start the HTTP server
 	http.ListenAndServe(":8080", nil)

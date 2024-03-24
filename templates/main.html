@@ -1,14 +1,4 @@
-package templates
-
-import (
-	"net/http"
-	"text/template"
-)
-
-// Render the main page using a template
-func MainPageHandler(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.New("main").Parse(`
-        <!DOCTYPE html>
+<!DOCTYPE html>
         <html>
         <head>
             <title>ASCII Art Web</title>
@@ -32,7 +22,7 @@ func MainPageHandler(w http.ResponseWriter, r *http.Request) {
 			h1 {
 				color: #333;
 				margin-bottom: 20px;
-				text-aligned: center;
+				text-align: center;
 			}
 	
 			form {
@@ -84,6 +74,3 @@ func MainPageHandler(w http.ResponseWriter, r *http.Request) {
             </form>
         </body>
         </html>
-    `))
-	tmpl.Execute(w, nil)
-}
