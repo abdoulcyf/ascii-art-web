@@ -1,4 +1,4 @@
-//==================================================
+// ==================================================
 package draw
 
 import (
@@ -19,7 +19,7 @@ func StrMaker(cliStr string, patternMap map[byte][]string, chLength int) string 
 	var finalStr string
 	//var finelItem string
 
-	cliStrArr := strings.Split(cliStr, "\\n")
+	cliStrArr := strings.Split(cliStr, "\r\n")
 	//fmt.Print(">", cliStrArr[1], "<\n")
 	//fmt.Println()
 	//-------------------------------------------
