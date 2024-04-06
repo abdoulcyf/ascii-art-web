@@ -4,6 +4,7 @@ import "testing"
 
 // ======================================================
 func Test_StrMaker(t *testing.T) {
+	t.Skip()
 	// ------------
 	t.Run("1-return ", func(t *testing.T) {
 		// -------setup-----

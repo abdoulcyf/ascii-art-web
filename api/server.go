@@ -58,7 +58,7 @@ func WriteHTMLResult(w http.ResponseWriter, status int, asciiArt string) error {
 			@media (max-width: 400px) {
 				/* Apply styles for screens with a maximum width of 400px */
 				pre {
-					font-size: 14px;
+					font-size: 10px;
 				}
 			}
 		</style>
