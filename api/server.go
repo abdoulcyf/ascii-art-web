@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"text/template"
 
-	"github.com/ediallocyf/asciiartweb/pkg/plot/draw"
 	"github.com/ediallocyf/asciiartweb/util"
 )
 
@@ -23,20 +22,6 @@ const (
 	standardBanner = "standard"
 	thinkerBanner  = "thinkertoy"
 )
-
-type apiFunc func(w http.ResponseWriter, r *http.Request) error
-
-type ApiError struct {
-	Error string
-}
-
-func makeHTTPHandlerFunc(f apiFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		if err := f(w, r); err != nil {
-			WriteHTML(w, http.StatusBadRequest, err.Error())
-		}
-	}
-}
 
 func WriteHTML(w http.ResponseWriter, status int, htmlContent string) error {
 	w.Header().Set("Content-Type", "text/html")
@@ -99,14 +84,6 @@ func NewAPIServer(listenAdrr string) *APIServer {
 	return &APIServer{
 		listenAdrr: listenAdrr,
 	}
-}
-
-func (s *APIServer) Run() {
-	mux := http.NewServeMux()
-
-	mux.HandleFunc("/", makeHTTPHandlerFunc(s.MainPageHandler))
-	mux.HandleFunc("/ascii-art", makeHTTPHandlerFunc(s.AsscitArtWebHandler))
-	http.ListenAndServe(s.listenAdrr, mux)
 }
 
 func (s *APIServer) MainPageHandler(w http.ResponseWriter, r *http.Request) error {
@@ -277,5 +254,27 @@ func GenerateAsciiArt(text, bannerType string) (string, error) {
 	if errPatternMap != nil {
 		return "", fmt.Errorf("error creating pattern map: %v", errPatternMap)
 	}
-	return draw.StrMaker(text, patternMap, chLength), nil
+	return util.StrMaker(text, patternMap, chLength), nil
+}
+
+type apiFunc func(w http.ResponseWriter, r *http.Request) error
+
+type ApiError struct {
+	Error string
+}
+
+func makeHTTPHandlerFunc(f apiFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if err := f(w, r); err != nil {
+			WriteHTML(w, http.StatusBadRequest, err.Error())
+		}
+	}
+}
+
+func (s *APIServer) Run() {
+	mux := http.NewServeMux()
+
+	mux.HandleFunc("/", makeHTTPHandlerFunc(s.MainPageHandler))
+	mux.HandleFunc("/ascii-art", makeHTTPHandlerFunc(s.AsscitArtWebHandler))
+	http.ListenAndServe(s.listenAdrr, mux)
 }

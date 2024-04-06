@@ -5,41 +5,33 @@ import (
 	"strings"
 )
 
-func StrMaker(cliStr string, patternMap map[byte][]string) string {
-	var finalStr strings.Builder
+func StrMaker(cliStr string, patternMap map[byte][]string, chLength int) string {
+	var finalStr string
 
-	maxWidth := 0
-	for _, char := range patternMap {
-		if len(char[0]) > maxWidth {
-			maxWidth = len(char[0])
+	cliStrArr := strings.Split(cliStr, "\r\n")
+
+	for _, strItem := range cliStrArr {
+		if strItem == "" {
+			finalStr += "\n"
+			continue
 		}
-	}
 
-	cliStrArr := strings.Split(strings.TrimSpace(cliStr), "\n\n")
-
-	for row := range patternMap[' '] {
-		for _, strItem := range cliStrArr {
+		for row := 1; row <= chLength; row++ {
 			for _, v := range strItem {
-				char, ok := patternMap[byte(v)]
-				if !ok || row >= len(char) {
-					finalStr.WriteString(strings.Repeat(" ", maxWidth))
-				} else {
-					finalStr.WriteString(char[row])
-					if len(char[row]) < maxWidth {
-						finalStr.WriteString(strings.Repeat(" ", maxWidth-len(char[row])))
-					}
-				}
+				finalStr += patternMap[byte(v)][row-1]
 			}
-			if strItem != cliStrArr[len(cliStrArr)-1] {
-				finalStr.WriteString(" ")
-			}
-		}
-		if row != len(patternMap[' '])-1 {
-			finalStr.WriteString("\n")
+			finalStr += "\n"
 		}
 	}
 
-	return finalStr.String()
+	if ((len(cliStrArr)) == 2) && (cliStrArr[0] == "") && cliStrArr[1] == "" {
+		finalStr = finalStr[:len(finalStr)-2]
+	} else {
+
+		finalStr = finalStr[:len(finalStr)-1]
+	}
+
+	return finalStr
 }
 
 func ContentToMap(content string, chLength int) (map[byte][]string, error) {
