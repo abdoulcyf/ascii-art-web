@@ -39,7 +39,7 @@ func makeHTTPHandlerFunc(f apiFunc) http.HandlerFunc {
 }
 
 func WriteHTML(w http.ResponseWriter, status int, htmlContent string) error {
-	w.Header().Add("Content-type", "text/html")
+	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(status)
 	tmpl := template.Must(template.New("main").Parse(htmlContent))
 	return tmpl.Execute(w, nil)
@@ -112,14 +112,15 @@ func (s *APIServer) Run() {
 func (s *APIServer) MainPageHandler(w http.ResponseWriter, r *http.Request) error {
 	if r.URL.Path != "/" {
 		http.Error(w, "404 not found", http.StatusNotFound)
+		return nil
 	}
 
-	if r.Method == "GET" {
-		return s.MainPageGetHandler(w, r)
-	} else {
-		return fmt.Errorf("method not allowed %s", r.Method)
+	if r.Method != "GET" {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return nil
 	}
 
+	return s.MainPageGetHandler(w, r)
 }
 
 func (s *APIServer) MainPageGetHandler(w http.ResponseWriter, r *http.Request) error {
