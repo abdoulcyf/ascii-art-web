@@ -5,7 +5,7 @@ build:
 	@go build -o asciiartweb main.go
 
 run: build
-	@echo "Running the project..."
+	@echo "Running the project at port 2030..."
 	@./asciiartweb
 
 test:
@@ -14,5 +14,5 @@ test:
 
 clean:
 	@echo "Cleaning up..."
-	rm -f asciiartweb
+	@rm -f asciiartweb
 

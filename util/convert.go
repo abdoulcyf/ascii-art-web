@@ -46,7 +46,7 @@ func ToMap(strArr []string, chLength int) (map[byte][]string, error) {
 	}
 	resultMap := make(map[byte][]string)
 	for i := ' '; i <= '~'; i++ {
-		startIndex := int((i - ' ')) * (chLength)
+		startIndex := int(i-' ') * (chLength)
 		endIndex := startIndex + chLength
 		resultMap[byte(i)] = strArr[startIndex:endIndex]
 	}
