@@ -24,61 +24,18 @@ const (
 )
 
 // WriteHTML writes an HTML response with the provided status code and content.
-func WriteHTML(w http.ResponseWriter, status int, htmlContent string) error {
+func WriteHTML(w http.ResponseWriter, status int) error {
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(status)
-	tmpl := template.Must(template.New("main").Parse(htmlContent))
+	tmpl := template.Must(template.ParseFiles("templates/index.html"))
 	return tmpl.Execute(w, nil)
 }
 
 // WriteHTMLResult writes an HTML response for displaying ASCII art result.
 func WriteHTMLResult(w http.ResponseWriter, status int, asciiArt string) error {
-	htmlContent := `<!DOCTYPE html>
-	<html>
-	<head>
-		<title>ASCII Art Result</title>
-		<style>
-			body {
-				text-align: center;
-				background-color: #4CAF50;
-				color: white;
-				font-family: monospace;
-				margin-top: 30px;
-			}
-	
-			@media (max-width: 600px) {
-				body {
-					margin-top: 10px;
-				}
-			}
-	
-			pre {
-				white-space: pre-wrap;
-				word-wrap: break-word;
-			}
-	
-			@media (max-width: 400px) {
-				/* Apply styles for screens with a maximum width of 400px */
-				pre {
-					font-size: 10px;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<h1>ASCII Art Result</h1>
-		<pre id="banner">{{.Banner}}</pre>
-		<script>
-		const banner = document.getElementById("banner");
-		console.log("BANNER:", banner);
-		</script>
-	</body>
-	</html>
-	`
-
 	w.Header().Add("Content-type", "text/html")
 	w.WriteHeader(status)
-	tmpl := template.Must(template.New("result").Parse(htmlContent))
+	tmpl := template.Must(template.ParseFiles("templates/ascii.html"))
 	return tmpl.Execute(w, struct{ Banner string }{asciiArt})
 }
 
@@ -108,104 +65,8 @@ func (s *Server) MainPageGetHandler(w http.ResponseWriter, r *http.Request) erro
 	if r.Method != http.MethodGet {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 	}
-	htmlContent := `<!DOCTYPE html>
-	<html>
-	<head>
-		<title>ASCII Art Web</title>
-		<style>
-		body {
-            background-color: #f7f7f7;
-            font-family: Arial, sans-serif;
-            margin: auto;
-            padding: 20px;
-            max-width: 600px; /* Limit width to 600px */
-        }
 
-        .container {
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        label {
-            color: #555;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"],
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        @media (max-width: 600px) {
-            /* Apply styles for screens with a maximum width of 600px */
-            body {
-                padding: 10px;
-            }
-
-            .container {
-                padding: 10px;
-            }
-
-            input[type="text"],
-            select,
-            button {
-                width: auto; /* Adjust width to fit content */
-            }
-        }
-		</style>
-	</head>
-	<body>
-		<h1>ASCII Art Web</h1>
-		<form method="POST" action="/ascii-art">
-			<label for="text">Text:</label><br>
-			<input type="text" id="text" name="text" placeholder="Type something" required><br>
-			<label for="banner">Banner:</label><br>
-			<select id="banner" name="banner">
-				<option value="shadow">Shadow</option>
-				<option value="standard">Standard</option>
-				<option value="thinkertoy">Thinkertoy</option>
-				<!-- <option value="SKit">Skit</option> -->
-			</select><br><br>
-			<button type="submit">Generate ASCII Art</button>
-		</form>
-	</body>
-	</html>`
-
-	return WriteHTML(w, http.StatusOK, htmlContent)
+	return WriteHTML(w, http.StatusOK)
 }
 
 // assertArtWebHandler handles requests to generate ASCII art.
@@ -251,11 +112,8 @@ func GenerateAsciiArt(text, bannerType string) (string, error) {
 		return "", fmt.Errorf("unknown banner type: %s", bannerType)
 	}
 
-	directory := "."
 	chLength := 8
-	// var firstCh byte = ' '
-	// var lastCh byte = '~'
-	patternContent, errPattern := util.ReadFileToStr(directory, patternFileName)
+	patternContent, errPattern := util.ReadFileToStr(patternFileName)
 	if errPattern != nil {
 		return "", fmt.Errorf("error loading pattern file: %v", errPattern)
 	}
@@ -276,7 +134,7 @@ type Error struct {
 func makeHTTPHandlerFunc(f apiFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if err := f(w, r); err != nil {
-			err := WriteHTML(w, http.StatusBadRequest, err.Error())
+			err := WriteHTML(w, http.StatusBadRequest)
 			if err != nil {
 				return
 			}

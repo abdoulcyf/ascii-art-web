@@ -7,13 +7,17 @@ import (
 	"os"
 )
 
-func ReadFileToStr(dir, filename string) (string, error) {
+func ReadFileToStr(filename string) (string, error) {
 	// Open the file
 	file, err := os.Open(filename)
 	if err != nil {
 		return "", fmt.Errorf("error opening file: %v", err)
 	}
-	defer file.Close()
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+		}
+	}(file)
 
 	// Create a new scanner
 	scanner := bufio.NewScanner(file)
