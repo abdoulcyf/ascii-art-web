@@ -1,7 +1,6 @@
 package handlers
 
-
-func LoadingServer(){
+func LoadingServer() {
 	server := NewAPIServer(":8080")
 	server.RunServer()
 }

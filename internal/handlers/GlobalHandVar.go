@@ -1,6 +1,13 @@
 package handlers
 
-import "net/http"
+import (
+	"log/slog"
+	"net/http"
+	"os"
+)
+
+var _ os.DirEntry    // for debugging, delete when done
+var _ slog.LogValuer // for debugging, delete when done
 
 type Server struct {
 	listener string
@@ -18,11 +25,15 @@ type Error struct {
 }
 
 const (
+	chLength = 8
+	
 	shadowBanner   = "shadow"
 	standardBanner = "standard"
 	thinkerBanner  = "thinkertoy"
 
 	contentType = "text/html"
+
+	portAddressNumber = ":8080"
 
 	templatesFilesAdrress   = "../../templates/"
 	homePageFileName        = "index.html"
@@ -32,6 +43,7 @@ const (
 	ascciArtTemplateAddress = templatesFilesAdrress + assciiArtFileName
 
 	homePagePath            = "/"
+	ascciArtPagePath        = "/ascii-art"
 	StatusNotFound          = "404 not found"
 	getRequest              = "GET"
 	methodNotAllowed        = "Method not allowed"
@@ -50,3 +62,10 @@ const (
 	thinkerToyPatternFileName    = "thinkertoy.txt"
 	thinkerToyPatternFileAddress = assetsFilesAddress + thinkerToyPatternFileName
 )
+
+// var (
+
+// 	logger = slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
+// 		Level: slog.LevelDebug,
+// 	})
+// )

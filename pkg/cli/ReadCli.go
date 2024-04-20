@@ -1,5 +1,5 @@
 //====================ReadCli=========================
-package cli 
+package cli
 
 import (
 	"errors"
@@ -19,13 +19,13 @@ func ReadCli() (string, error) {
 		return "", errors.New("more than 1 input arguments")
 	}
 
-
 	cliStr := args[1]
 
-	if cliStr=="" {
-		return "",errors.New("empty string")
+	if cliStr == "" {
+		return "", errors.New("empty string")
 	}
 
 	return cliStr, nil
 }
+
 //====================END===========================

@@ -21,7 +21,6 @@ func GenerateAsciiArt(text, bannerType string) (string, error) {
 		return "", fmt.Errorf("unknown banner type: %s", bannerType)
 	}
 
-	chLength := 8
 	patternContent, errPattern := util.ReadFileToStr(patternFileName)
 	if errPattern != nil {
 		return "", fmt.Errorf("error loading pattern file: %v", errPattern)

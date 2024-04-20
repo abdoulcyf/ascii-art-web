@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"log"
 	"net/http"
 )
 
@@ -8,10 +9,12 @@ import (
 func (s *Server) RunServer() {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/", makeHTTPHandlerFunc(s.MainPageHandler))
-	mux.HandleFunc("/ascii-art", makeHTTPHandlerFunc(s.assertArtWebHandler))
+	mux.HandleFunc(homePagePath, makeHTTPHandlerFunc(s.HomeHandler))
+	mux.HandleFunc(ascciArtPagePath, makeHTTPHandlerFunc(s.assertArtWebHandler))
 	err := http.ListenAndServe(s.listener, mux)
 	if err != nil {
-		return
+		log.Fatal("Failed to start the server")
+	} else {
+		log.Println("Server is running at port 8080")
 	}
 }
