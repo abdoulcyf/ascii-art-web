@@ -13,7 +13,10 @@ type AsciiArtWeb struct {
 	Banner string
 }
 
-
+type Banner struct {
+	Banner string
+	Url    string
+}
 
 //type apiFunc func(w http.ResponseWriter, r *http.Request) error
 
@@ -35,7 +38,7 @@ const (
 	hopePageTemplateAdrress = templatesFilesAdrress + homePageFileName
 
 	errorTempFileName = "error.html"
-	errorTemplAdrr = templatesFilesAdrress + errorTempFileName
+	errorTemplAdrr    = templatesFilesAdrress + errorTempFileName
 
 	assciiArtFileName       = "ascii.html"
 	ascciArtTemplateAddress = templatesFilesAdrress + assciiArtFileName

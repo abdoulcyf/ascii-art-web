@@ -6,6 +6,7 @@ import (
 	"text/template"
 )
 
+
 // GenerateAsciiArtHandler handles requests to generate and display ASCII art.
 func GenerateAsciiArtHandler(w http.ResponseWriter, r *http.Request) error {
 	//-----------------------------------------------------------
@@ -37,8 +38,13 @@ func GenerateAsciiArtHandler(w http.ResponseWriter, r *http.Request) error {
 		// Parse HTML template
 		tmpl := template.Must(template.ParseFiles(ascciArtTemplateAddress))
 
+		//prepare data for template
+		data := Banner{
+			Banner: asciiArt,
+			Url: homePagePath,
+		}
 		// Execute ASCII art template
-		errAscciTemp := tmpl.Execute(w, struct{ Banner string }{asciiArt})
+		errAscciTemp := tmpl.Execute(w, data)
 		if errAscciTemp != nil {
 			errMsg := "----<-GenerateAsciiArtHandler------<--ParseFiles----" + errAscciTemp.Error()
 			logMsg := "Error executing ASCII art template"
