@@ -1,6 +1,6 @@
 package handlers
 
-import "net/http"
+/*import "net/http"
 
 // makeHTTPHandlerFunc creates an HTTP handler function from an API function.
 func makeHTTPHandlerFunc(f apiFunc) http.HandlerFunc {
@@ -12,4 +12,4 @@ func makeHTTPHandlerFunc(f apiFunc) http.HandlerFunc {
 			}
 		}
 	}
-}
+}*/

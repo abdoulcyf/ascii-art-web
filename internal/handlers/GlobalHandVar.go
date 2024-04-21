@@ -2,12 +2,11 @@ package handlers
 
 import (
 	"log/slog"
-	"net/http"
 	"os"
 )
 
-var _ os.DirEntry    // for debugging, delete when done
-var _ slog.LogValuer // for debugging, delete when done
+// var _ os.DirEntry    // for debugging, delete when done
+// var _ slog.LogValuer // for debugging, delete when done
 
 type Server struct {
 	listener string
@@ -18,7 +17,7 @@ type AsciiArtWeb struct {
 	Banner string
 }
 
-type apiFunc func(w http.ResponseWriter, r *http.Request) error
+//type apiFunc func(w http.ResponseWriter, r *http.Request) error
 
 type Error struct {
 	Error string
@@ -26,14 +25,12 @@ type Error struct {
 
 const (
 	chLength = 8
-	
+
 	shadowBanner   = "shadow"
 	standardBanner = "standard"
 	thinkerBanner  = "thinkertoy"
 
 	contentType = "text/html"
-
-	portAddressNumber = ":8080"
 
 	templatesFilesAdrress   = "../../templates/"
 	homePageFileName        = "index.html"
@@ -61,11 +58,18 @@ const (
 
 	thinkerToyPatternFileName    = "thinkertoy.txt"
 	thinkerToyPatternFileAddress = assetsFilesAddress + thinkerToyPatternFileName
+
+	
 )
 
-// var (
+var (
+	logger = slog.New(slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{
+		Level: slog.LevelDebug,
+	}))
 
-// 	logger = slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
-// 		Level: slog.LevelDebug,
-// 	})
-// )
+)
+
+var (
+	errMsg string
+	logMsg string
+)
