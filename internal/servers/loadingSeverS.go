@@ -1,13 +1,24 @@
 package servers
 
-import "net/http"
+import (
+	"errors"
+	"net/http"
+)
 
-
-func LoadingServerS() {
+func LoadingServerS() error {
 
 	mux := http.NewServeMux()
 
 	mux.HandleFunc(homePagePath, MainHandler)
 
-	http.ListenAndServe(portAddressNumber, mux)
+	errLoadingServer := http.ListenAndServe(portAddressNumber, mux)
+	if errLoadingServer != nil {
+		errMsg = "----<-LoadingServerS------<--ListenAndServe----" + errLoadingServer.Error()
+		logMsg = "Error while to attempt to start the server"
+		logger.Error(logMsg + errMsg)
+		return errors.New(errMsg)
+	}
+
+	logger.Info("Server running at port 8080")
+	return nil
 }

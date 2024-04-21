@@ -22,17 +22,16 @@ func MainHandler(w http.ResponseWriter, r *http.Request) {
 			logger.Info(" Home page loaded successfully")
 		}
 	case r.URL.Path == ascciArtPagePath && r.Method == http.MethodPost:
-		errAsciiArt := handlers.AssertArtWebHandler(w, r)
+		errAsciiArt := handlers.GenerateAsciiArtHandler(w, r)
 		if errAsciiArt != nil {
 			errMsg = "----<-MainHandler------<--AssertArtWebHandler----" + errAsciiArt.Error()
 			logMsg = "Error in loading arscii art page"
 			logger.Error(logMsg + errMsg)
 			return
-		} else {
-			logger.Info("Ascii art page loaded successfully")
 		}
 	default:
 		w.WriteHeader(http.StatusNotExtended)
-		//logger.Error("template not found")
+		logger.Info("Ascii art page loaded successfully")
 	}
+
 }

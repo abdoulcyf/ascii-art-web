@@ -8,14 +8,12 @@ import (
 // var _ os.DirEntry    // for debugging, delete when done
 // var _ slog.LogValuer // for debugging, delete when done
 
-type Server struct {
-	listener string
-}
-
 type AsciiArtWeb struct {
 	Text   string
 	Banner string
 }
+
+
 
 //type apiFunc func(w http.ResponseWriter, r *http.Request) error
 
@@ -30,11 +28,14 @@ const (
 	standardBanner = "standard"
 	thinkerBanner  = "thinkertoy"
 
-	contentType = "text/html"
+	//contentType = "text/html"
 
 	templatesFilesAdrress   = "../../templates/"
 	homePageFileName        = "index.html"
 	hopePageTemplateAdrress = templatesFilesAdrress + homePageFileName
+
+	errorTempFileName = "error.html"
+	errorTemplAdrr = templatesFilesAdrress + errorTempFileName
 
 	assciiArtFileName       = "ascii.html"
 	ascciArtTemplateAddress = templatesFilesAdrress + assciiArtFileName
@@ -58,15 +59,12 @@ const (
 
 	thinkerToyPatternFileName    = "thinkertoy.txt"
 	thinkerToyPatternFileAddress = assetsFilesAddress + thinkerToyPatternFileName
-
-	
 )
 
 var (
 	logger = slog.New(slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{
 		Level: slog.LevelDebug,
 	}))
-
 )
 
 var (
