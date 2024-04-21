@@ -26,7 +26,7 @@ var (
 
 const (
 	homePagePath            = "/"
-	StatusNotFound          = "404 not found"
+	NotFound404          = "404 not found"
 	getRequest              = "GET"
 	methodNotAllowed        = "Method not allowed"
 	badRequest              = "Bad Request"

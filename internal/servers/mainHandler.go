@@ -11,6 +11,7 @@ import (
 // Run starts the HTTP server.
 func MainHandler(w http.ResponseWriter, r *http.Request) {
 	switch {
+	//----------------------------------------------
 	case r.URL.Path == homePagePath && r.Method == http.MethodGet:
 		errHomeHandler := handlers.HomeHandler(w, r)
 		if errHomeHandler != nil {
@@ -21,6 +22,8 @@ func MainHandler(w http.ResponseWriter, r *http.Request) {
 		} else {
 			logger.Info(" Home page loaded successfully")
 		}
+
+		//--------------------------------------------
 	case r.URL.Path == ascciArtPagePath && r.Method == http.MethodPost:
 		errAsciiArt := handlers.GenerateAsciiArtHandler(w, r)
 		if errAsciiArt != nil {
@@ -29,9 +32,12 @@ func MainHandler(w http.ResponseWriter, r *http.Request) {
 			logger.Error(logMsg + errMsg)
 			return
 		}
+
+		//-----------------------------------------------
 	default:
-		w.WriteHeader(http.StatusNotExtended)
-		logger.Info("Ascii art page loaded successfully")
+		//opName, opDes = "default", "user try to GET unknown page"
+		logger.Info("user try to GET unknown page")
+		handlers.ErrorPage(w, NotFound404)
 	}
 
 }
