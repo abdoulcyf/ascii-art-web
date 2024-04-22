@@ -33,7 +33,7 @@ const (
 
 	//contentType = "text/html"
 
-	templatesFilesAdrress   = "../../templates/"
+	templatesFilesAdrress   = "templates/"
 	homePageFileName        = "index.html"
 	hopePageTemplateAdrress = templatesFilesAdrress + homePageFileName
 
@@ -52,7 +52,7 @@ const (
 	ErrorGeneratingAsciiArt = "Error generating ASCII art:"
 	BannerNotFound          = "Banner not found"
 
-	assetsFilesAddress = "../../assets/"
+	assetsFilesAddress = "assets/"
 
 	shadowPatternFileName    = "shadow.txt"
 	shadowPatternFileAddress = assetsFilesAddress + shadowPatternFileName
