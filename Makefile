@@ -2,7 +2,7 @@
 
 build:
 	@echo "Building the project..."
-	@go build -o asciiartweb main.go
+	@go build -o asciiartweb app/web_app/main.go
 
 run: build
 	@echo "Running the project at port 8080..."
