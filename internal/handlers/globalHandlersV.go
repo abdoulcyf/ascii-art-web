@@ -11,15 +11,16 @@ import (
 
 type Banner struct {
 	//Text   string
-	Banner       string
-	Url string
+	Banner string
+	Url    string
 }
 
 const (
-	domain      = "localhost:"
-	portNumber  = "8080"
-	homePathUrl = domain + portNumber
+	domain       = "localhost:"
+	portNumber   = "8080"
+	homePathUrl  = domain + portNumber
 	homePagePath = "/"
+	actionPath = "/ascii-art"
 
 	shadowBanner   = "shadow"
 	standardBanner = "standard"
@@ -44,6 +45,7 @@ const (
 	errorTemplateAdrr = templateFilesDir + errorTemplateName
 
 	BannerNotFound = "Banner Not Found"
+	NotFound = "404 - Page Not Found"
 )
 
 var (

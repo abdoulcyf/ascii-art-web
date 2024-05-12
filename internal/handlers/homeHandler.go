@@ -4,8 +4,9 @@ import "net/http"
 
 // MainPageHandler handles requests to the main page
 func MainPageHandler(w http.ResponseWriter, r *http.Request) error {
-	if r.URL.Path != "/" {
-		http.Error(w, "404 not found", http.StatusNotFound)
+	if r.URL.Path != homePagePath {
+		//http.Error(w, "404 not found", http.StatusNotFound)
+		ErrorPage(w, NotFound)
 		return nil
 	}
 
@@ -16,3 +17,5 @@ func MainPageHandler(w http.ResponseWriter, r *http.Request) error {
 
 	return MainPageGetHandler(w, r)
 }
+
+
