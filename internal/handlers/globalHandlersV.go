@@ -9,10 +9,11 @@ import (
 // 	listener string
 // }
 
-type Banner struct {
+type AsciiArt struct {
 	//Text   string
 	Banner string
 	Url    string
+	StyleAdrr string
 }
 
 const (
@@ -46,6 +47,11 @@ const (
 
 	BannerNotFound = "Banner Not Found"
 	NotFound = "404 - Page Not Found"
+
+	staticFilesDir = "../../static/styles/"
+
+	ascciStyleName = "ascii.css"
+	asciiStyleAdrr = staticFilesDir + ascciStyleName
 )
 
 var (

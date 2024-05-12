@@ -17,4 +17,7 @@ const (
 	asciiArtPage = "/ascii-art"
 
 	//portNumber = ":8080"
+
+	baseStaticDir = "/static/"
+	staticFilesAddress = "../../static/"
 )
