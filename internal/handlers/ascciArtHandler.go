@@ -40,6 +40,7 @@ func AsciiArtHandler(w http.ResponseWriter, r *http.Request) error {
 			Banner:    asciiArt,
 			Url:       homePagePath,
 			StyleAdrr: asciiStyleAdrr,
+			Title : asciiArtTitle,
 		}
 		// Execute ASCII art template
 		errAscciTemp := tmpl.Execute(w, data)

@@ -9,15 +9,16 @@ import (
 )
 
 // Run starts the HTTP server.
-func (s *server) Run() {
+func (s *server) Run() error {
 
 	//Call serveStaticFiles function to get the static files handler
 	errFileServer := s.serveStaticFiles(staticFilesAddress)
 
 	if errFileServer != nil {
 		fmt.Printf("file directory does not exit %s", errFileServer)
-		return
+		return errFileServer
 	}
+	return nil
 
 
 	//----------------------------

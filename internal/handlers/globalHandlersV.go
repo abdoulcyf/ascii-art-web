@@ -14,6 +14,7 @@ type AsciiArt struct {
 	Banner string
 	Url    string
 	StyleAdrr string
+	Title string
 }
 
 const (
@@ -38,9 +39,12 @@ const (
 
 	homeTemplateName = "index.html"
 	homeTemplateAdrr = templateFilesDir + homeTemplateName
+	homeTitle = "Ascii Art Wep App"
+	
 
 	asciiTemplateName = "ascii.html"
 	asciiTemplateAdrr = templateFilesDir + asciiTemplateName
+	asciiArtTitle = "Ascii Art Banner"
 
 	errorTemplateName = "error.html"
 	errorTemplateAdrr = templateFilesDir + errorTemplateName
@@ -52,6 +56,9 @@ const (
 
 	ascciStyleName = "ascii.css"
 	asciiStyleAdrr = staticFilesDir + ascciStyleName
+
+	homeStyleName = "index.css"
+	homeStyleAdrr = staticFilesDir + homeStyleName
 )
 
 var (

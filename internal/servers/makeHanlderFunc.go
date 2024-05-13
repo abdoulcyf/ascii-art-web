@@ -9,7 +9,7 @@ import (
 func makeHTTPHandlerFunc(f apiFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		if err := f(w, r); err != nil {
-			err := handlers.WriteHTML(w, http.StatusBadRequest)
+			err := handlers.HomeHadler(w, http.StatusBadRequest)
 			if err != nil {
 				return
 			}

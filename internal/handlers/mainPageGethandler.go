@@ -8,5 +8,5 @@ func MainPageGetHandler(w http.ResponseWriter, r *http.Request) error {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 	}
 
-	return WriteHTML(w, http.StatusOK)
+	return HomeHadler(w, http.StatusOK)
 }
