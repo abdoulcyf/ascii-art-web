@@ -1,6 +1,20 @@
 package servers
 
-import "net/http"
+import (
+	"fmt"
+	"net/http"
+)
+
+
+type MyError struct {
+	code int
+	Message string
+}
+
+func (e *MyError) Error() string {
+	return fmt.Sprintf("Error %d: %s", e.code, e.Message)
+}
+
 
 type server struct {
 	listener string

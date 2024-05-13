@@ -18,14 +18,13 @@ func (s *server) Run() error {
 		fmt.Printf("file directory does not exit %s", errFileServer)
 		return errFileServer
 	}
-	return nil
-
 
 	//----------------------------
 	http.HandleFunc(homePagePath, makeHTTPHandlerFunc(handlers.MainPageHandler))
 	http.HandleFunc(asciiArtPage, makeHTTPHandlerFunc(handlers.AsciiArtHandler))
 	err := http.ListenAndServe(s.listener, nil)
 	if err != nil {
-		return
+		return err
 	}
+	return nil
 }
