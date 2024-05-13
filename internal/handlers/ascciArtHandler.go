@@ -31,8 +31,10 @@ func AsciiArtHandler(w http.ResponseWriter, r *http.Request) error {
 			return errors.New(errMsg)
 		}
 		logger.Info("ASCII Banner generated successfully")
+
 		// Parse HTML template
 		tmpl := template.Must(template.ParseFiles(asciiTemplateAdrr))
+		
 		//prepare data for template
 		data := AsciiArt{
 			Banner:    asciiArt,

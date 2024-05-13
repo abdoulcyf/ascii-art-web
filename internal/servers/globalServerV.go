@@ -19,5 +19,5 @@ const (
 	//portNumber = ":8080"
 
 	baseStaticDir = "/static/"
-	staticFilesAddress = "../../static/"
+	staticFilesAddress = "../../static"
 )
