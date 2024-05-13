@@ -19,11 +19,11 @@ func (s *server) Run() {
 		return
 	}
 
+
 	//----------------------------
-	mux := http.NewServeMux()
-	mux.HandleFunc(homePagePath, makeHTTPHandlerFunc(handlers.MainPageHandler))
-	mux.HandleFunc(asciiArtPage, makeHTTPHandlerFunc(handlers.AsciiArtHandler))
-	err := http.ListenAndServe(s.listener, mux)
+	http.HandleFunc(homePagePath, makeHTTPHandlerFunc(handlers.MainPageHandler))
+	http.HandleFunc(asciiArtPage, makeHTTPHandlerFunc(handlers.AsciiArtHandler))
+	err := http.ListenAndServe(s.listener, nil)
 	if err != nil {
 		return
 	}
