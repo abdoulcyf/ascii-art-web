@@ -3,7 +3,6 @@ package servers
 import (
 	"net/http"
 	"os"
-	//"github.com/ediallocyf/asciiartweb/Logs"
 )
 
 func (s *server) fileServer(staticFilesAddress string) error {

@@ -5,12 +5,8 @@ import (
 	"os"
 )
 
-// type Server struct {
-// 	listener string
-// }
 
 type AsciiArt struct {
-	//Text   string
 	Banner string
 	Url    string
 	StyleAdrr string
@@ -66,7 +62,7 @@ var (
 		Level: slog.LevelDebug,
 	}))
 )
-var (
-	errMsg string
-	logMsg string
-)
+// var (
+// 	errMsg string
+// 	logMsg string
+// )

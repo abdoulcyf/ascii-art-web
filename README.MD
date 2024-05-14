@@ -12,7 +12,7 @@ To run the ASCII Art Web application, follow these steps:
 2. Navigate to the project directory: `cd ascii-art-web`
 3. Build the project: `make build`
 4. Run the application: `make run`
-5. Access the application in your web browser at: `http://localhost:2030`
+5. Access the application in your web browser at: `http://localhost:8080`
 
 ## Implementation Details: Algorithm
 The ASCII Art generation algorithm works as follows:
