@@ -29,13 +29,13 @@ const (
 	thinkerBanner  = "thinkertoy"
 	fileExt        = ".txt"
 
-	assetsFileDir = "../../assets/"
+	assetsFileDir = "assets/"
 
 	shadowPatterFileAdrr     = assetsFileDir + shadowBanner + fileExt
 	standardPatterFileAdrr   = assetsFileDir + standardBanner + fileExt
 	thinkertoyPatterFileAdrr = assetsFileDir + thinkerBanner + fileExt
 
-	templateFilesDir = "../../templates/"
+	templateFilesDir = "templates/"
 
 	homeTemplateName = "index.html"
 	homeTemplateAdrr = templateFilesDir + homeTemplateName

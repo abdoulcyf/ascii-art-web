@@ -4,14 +4,14 @@ GOBUILD=$(GOCMD) build
 GOCLEAN=$(GOCMD) clean
 
 # Main application name
-APP_NAME=Troupie-Tracker
+APP_NAME=Ascii-Art-Web
 
 # Directories 
 SRC_DIR=./
-WEB_APP_DIR=$(SRC_DIR)cmd/webApp
+WEB_APP_DIR=$(SRC_DIR)cmd/webApp/
 
 # Binary names
-WEB_BINARY=$(WEB_APP_DIR)/asciiartweb
+WEB_BINARY=asciiartweb
 
 # Targets
 .PHONY: all cli web clean run
@@ -20,13 +20,11 @@ all: cli web
 
 
 web:
-	cd $(WEB_APP_DIR) && \
-	$(GOBUILD) -o $(WEB_BINARY) main.go
+	$(GOBUILD) -o $(WEB_BINARY) $(WEB_APP_DIR)main.go
 
 
 run-web: web
-	cd $(WEB_APP_DIR) && \
-	$(WEB_BINARY)
+		./$(WEB_BINARY)
 
 clean:
 	@echo cleaning...
