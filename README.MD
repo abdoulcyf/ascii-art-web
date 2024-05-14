@@ -4,8 +4,8 @@
 ASCII Art Web is a simple web application that allows users to generate ASCII art from text input using various banner styles.
 
 ## Authors
-- [Elhadj Abdoul](https://github.com/abdoulcyf)
-- [Alireza Sanandaji](https://learn.01founders.co/git/asananda)
+- [Elhadj](https://github.com/abdoulcyf)
+- [Reza](https://learn.01founders.co/git/asananda)
 ## Usage: How to Run
 To run the ASCII Art Web application, follow these steps:
 1. Clone the repository: `git clone https://learn.01founders.co/git/ediallo/ascii-art-web.git`
