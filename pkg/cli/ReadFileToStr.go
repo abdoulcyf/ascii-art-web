@@ -1,4 +1,3 @@
-
 //=================ReadFileToStr=======================
 package cli
 
@@ -26,4 +25,3 @@ func ReadFileToStr(dir, filename string) (string, error) {
 }
 
 //==================================================
-
