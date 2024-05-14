@@ -10,6 +10,9 @@ APP_NAME=Ascii-Art-Web
 SRC_DIR=./
 WEB_APP_DIR=$(SRC_DIR)cmd/webApp/
 
+# Files
+MAIN_FILE=server.go
+
 # Binary names
 WEB_BINARY=asciiartweb
 
@@ -20,13 +23,13 @@ all: cli web
 
 
 web:
-	$(GOBUILD) -o $(WEB_BINARY) $(WEB_APP_DIR)main.go
+	$(GOBUILD) -o $(WEB_BINARY) $(WEB_APP_DIR)$(MAIN_FILE)
 
 
 run-web: web
-		./$(WEB_BINARY)
+		$(SRC_DIR)$(WEB_BINARY)
 
 clean:
 	@echo cleaning...
 	@$(GOCLEAN)
-	@rm -f $(WEB_BINARY)
+	rm -f $(WEB_BINARY)
