@@ -1,18 +1,34 @@
-.PHONY: build run test
+# Go parameters
+GOCMD=go
+GOBUILD=$(GOCMD) build
+GOCLEAN=$(GOCMD) clean
 
-build:
-	@echo "Building the project..."
-	@go build -o asciiartweb app/web_app/main.go
+# Main application name
+APP_NAME=Troupie-Tracker
 
-run: build
-	@echo "Running the project at port 8080..."
-	@./asciiartweb
+# Directories 
+SRC_DIR=./
+WEB_APP_DIR=$(SRC_DIR)cmd/webApp
 
-test:
-	@echo "Running tests..."
-	@go test  -v ./...
+# Binary names
+WEB_BINARY=$(WEB_APP_DIR)/asciiartweb
+
+# Targets
+.PHONY: all cli web clean run
+
+all: cli web
+
+
+web:
+	cd $(WEB_APP_DIR) && \
+	$(GOBUILD) -o $(WEB_BINARY) main.go
+
+
+run-web: web
+	cd $(WEB_APP_DIR) && \
+	$(WEB_BINARY)
 
 clean:
-	@echo "Cleaning up..."
-	@rm -f asciiartweb
-
+	@echo cleaning...
+	@$(GOCLEAN)
+	@rm -f $(WEB_BINARY)

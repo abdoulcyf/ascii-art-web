@@ -8,7 +8,7 @@ import (
 
 func ErrorPage(w http.ResponseWriter, errMsg string) {
 	// Define the template
-	t := template.Must(template.ParseFiles(errorTemplAdrr))
+	t := template.Must(template.ParseFiles(errorTemplateAdrr))
 	data := struct {
 		Msg string
 		Url string

@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"errors"
+	"fmt"
 
 	"github.com/ediallocyf/asciiartweb/util"
 )
@@ -9,33 +9,24 @@ import (
 // GenerateAsciiArt generates ASCII art based on the provided text and banner type.
 func GenerateAsciiArt(text, bannerType string) (string, error) {
 	var patternFileName string
-
 	switch bannerType {
 	case shadowBanner:
-		patternFileName = shadowPatternFileAddress
+		patternFileName = shadowPatterFileAdrr
 	case standardBanner:
-		patternFileName = standardPatternfileAdrress
+		patternFileName = standardPatterFileAdrr
 	case thinkerBanner:
-		patternFileName = thinkerToyPatternFileAddress
+		patternFileName = thinkertoyPatterFileAdrr
 	default:
-		logger.Error("Unknown Banner----<<--GenerateAsciiArt---", "type", bannerType)
+		return "", fmt.Errorf("unknown banner type: %s", bannerType)
 	}
-
+	chLength := 8
 	patternContent, errPattern := util.ReadFileToStr(patternFileName)
 	if errPattern != nil {
-		errMsg = "----<-GenerateAsciiArt------<--patternContent----" + errPattern.Error()
-		logMsg = "Error in loading file content"
-		logger.Error(logMsg + errMsg)
-		return "", errors.New(errMsg)
-	} else {
-		logger.Info("file content loaded successfullly---<---GenerateAsciiArt---<-patternContent--")
+		return "", fmt.Errorf("error loading pattern file: %v", errPattern)
 	}
 	patternMap, errPatternMap := util.ContentToMap(patternContent, chLength)
 	if errPatternMap != nil {
-		errMsg = "----<-GenerateAsciiArt------<--patternMap----" + errPatternMap.Error()
-		logMsg = "Errorinc converting pathern to map"
-		logger.Error(logMsg + errMsg)
-		return "", errors.New(errMsg)
+		return "", fmt.Errorf("error creating pattern map: %v", errPatternMap)
 	}
 	return util.StrMaker(text, patternMap, chLength), nil
 }

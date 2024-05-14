@@ -6,14 +6,8 @@ import (
 	"text/template"
 )
 
-
 // GenerateAsciiArtHandler handles requests to generate and display ASCII art.
 func AsciiArtHandler(w http.ResponseWriter, r *http.Request) error {
-
-
-// GenerateAsciiArtHandler handles requests to generate and display ASCII art.
-func GenerateAsciiArtHandler(w http.ResponseWriter, r *http.Request) error {
-
 	//-----------------------------------------------------------
 	errParseForm := r.ParseForm()
 	if errParseForm != nil {
@@ -23,13 +17,10 @@ func GenerateAsciiArtHandler(w http.ResponseWriter, r *http.Request) error {
 		return errors.New(errMsg)
 	}
 	logger.Info("Form parsed successfully")
-
-
 	//-----------------------------------
 	text := r.Form.Get("text")
 	banner := r.Form.Get("banner")
 	//---------------------------------
-
 	switch banner {
 	case shadowBanner, standardBanner, thinkerBanner:
 		asciiArt, errGenerateAscii := GenerateAsciiArt(text, banner)
@@ -40,25 +31,15 @@ func GenerateAsciiArtHandler(w http.ResponseWriter, r *http.Request) error {
 			return errors.New(errMsg)
 		}
 		logger.Info("ASCII Banner generated successfully")
-
 		// Parse HTML template
-
 		tmpl := template.Must(template.ParseFiles(asciiTemplateAdrr))
-		
+
 		//prepare data for template
 		data := AsciiArt{
 			Banner:    asciiArt,
 			Url:       homePagePath,
 			StyleAdrr: asciiStyleAdrr,
-			Title : asciiArtTitle,
-
-		tmpl := template.Must(template.ParseFiles(ascciArtTemplateAddress))
-
-		//prepare data for template
-		data := Banner{
-			Banner: asciiArt,
-			Url: homePagePath,
-
+			Title:     asciiArtTitle,
 		}
 		// Execute ASCII art template
 		errAscciTemp := tmpl.Execute(w, data)
@@ -69,8 +50,6 @@ func GenerateAsciiArtHandler(w http.ResponseWriter, r *http.Request) error {
 		} else {
 			logger.Info("ASCII Art Template parsed successfully")
 		}
-
-
 		return nil
 	default:
 		ErrorPage(w, BannerNotFound)
