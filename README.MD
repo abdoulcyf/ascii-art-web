@@ -10,9 +10,8 @@ ASCII Art Web is a simple web application that allows users to generate ASCII ar
 To run the ASCII Art Web application, follow these steps:
 1. Clone the repository: `git clone https://learn.01founders.co/git/ediallo/ascii-art-web.git`
 2. Navigate to the project directory: `cd ascii-art-web`
-3. Build the project: `make build`
-4. Run the application: `make run`
-5. Access the application in your web browser at: `http://localhost:8080`
+3. Build and Run the application: `make run-web`
+4. Access the application in your web browser at: `http://localhost:8080`
 
 ## Implementation Details: Algorithm
 The ASCII Art generation algorithm works as follows:
