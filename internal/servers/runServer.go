@@ -1,7 +1,6 @@
 package servers
 
 import (
-	//"fmt"
 	"fmt"
 	"net/http"
 
@@ -24,7 +23,9 @@ func (s *server) Run() error {
 	http.HandleFunc(asciiArtPage, makeHTTPHandlerFunc(handlers.AsciiArtHandler))
 	err := http.ListenAndServe(s.listener, nil)
 	if err != nil {
-		return err
+		return fmt.Errorf("Error listening %w", err)
+	} else {
+		fmt.Println("Server is running at port :8080")
 	}
 	return nil
 }
